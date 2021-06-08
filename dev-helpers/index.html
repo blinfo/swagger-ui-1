@@ -42,8 +42,13 @@
       window["SwaggerUIStandalonePreset"] = window["swagger-ui-standalone-preset"]
       // Build a system
       const ui = SwaggerUIBundle({
-        url: "https://petstore.swagger.io/v2/swagger.json",
+        url: "http://localhost:8080/v3/api-docs",
         dom_id: '#swagger-ui',
+        onComplete: () => {      
+          console.log('Foo');
+          ui.preauthorizeApiKey("Simple-Credentials", "X2tMPkkQ82,v2SM9xaNTS,3utBMagA8U");
+          //ui.preauthorizeApiKey("api-key", "8eef5ddb-817a-4a52-8eea-b7a9baf2da6d");
+        },
         presets: [
           SwaggerUIBundle.presets.apis,
           SwaggerUIStandalonePreset
@@ -52,13 +57,14 @@
           SwaggerUIBundle.plugins.DownloadUrl
         ],
         layout: "StandaloneLayout"
-      })
+      });
+
 
       window.ui = ui
-
+      
       ui.initOAuth({
-        clientId: "your-client-id",
-        clientSecret: "your-client-secret-if-required",
+        clientId: "swagger",
+        clientSecret: "2ca0d73e-e71c-476d-b87e-0e1ec8262fe5",
         realm: "your-realms",
         appName: "your-app-name",
         scopeSeparator: " ",
